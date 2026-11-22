@@ -2,10 +2,12 @@
 // plays while it is in view. Browsers only allow autoplay muted, so every loop gets a sound button.
 // Once a visitor turns sound on, it stays on for the page: the loop most in view plays with sound
 // and the others stay muted, so two clips never talk over each other.
+// <video class="gif"> clips are silent GIF-style loops: same autoplay, no sound button.
 // With reduced motion the loops show their poster and player controls instead of autoplaying.
 (function () {
-  var videos = Array.prototype.slice.call(document.querySelectorAll("video.loop"));
+  var videos = Array.prototype.slice.call(document.querySelectorAll("video.loop, video.gif"));
   var still = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var loud = videos.filter(function (v) { return v.classList.contains("loop"); });
   var soundOn = false;
   var ratio = new Map();
 
@@ -19,7 +21,7 @@
     if (chosen && (ratio.get(chosen) || 0) > 0.2) return chosen;
     chosen = null;
     var best = null, top = 0;
-    videos.forEach(function (v) {
+    loud.forEach(function (v) {
       var r = ratio.get(v) || 0;
       if (r > top) { top = r; best = v; }
     });
@@ -28,7 +30,7 @@
 
   function refreshSound() {
     var lead = soundOn ? loudest() : null;
-    videos.forEach(function (v) {
+    loud.forEach(function (v) {
       v.muted = v !== lead;
       var b = v._snd;
       if (b) {
@@ -61,11 +63,11 @@
   }
 
   if (still || !("IntersectionObserver" in window)) {
-    videos.forEach(function (v) { v.controls = true; v.muted = false; load(v); });
+    videos.forEach(function (v) { v.controls = true; v.muted = v.classList.contains("gif"); load(v); });
     return;
   }
 
-  videos.forEach(addButton);
+  videos.forEach(function (v) { if (v.classList.contains("loop")) addButton(v); });
 
   var io = new IntersectionObserver(function (entries) {
     entries.forEach(function (e) {
