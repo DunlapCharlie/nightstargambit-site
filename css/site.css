@@ -135,6 +135,17 @@ textarea { min-height: 140px; resize: vertical; }
 video { width: 100%; border: 1px solid var(--line); background: #000; }
 .media video, .loops video { display: block; aspect-ratio: 16 / 9; object-fit: cover; border: 0; }
 .split.flip .media { order: -1; }
+.media, .loops figure { position: relative; }
+.snd { position: absolute; right: 20px; top: 20px; display: flex; align-items: center; gap: 8px; padding: 7px 12px 7px 9px;
+  font: 600 12px/1 var(--display); letter-spacing: 2px; text-transform: uppercase; color: var(--paper);
+  background: rgba(11,16,38,.78); border: 1px solid var(--line); cursor: pointer; transition: border-color .2s, color .2s; }
+.snd:hover, .snd:focus-visible { border-color: var(--cyan); color: var(--cyan); outline: none; }
+.snd svg { width: 18px; height: 18px; fill: currentColor; }
+.snd svg .wave, .snd svg .x { fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; }
+.snd .wave { display: none; }
+.snd.on { border-color: var(--cyan); color: var(--cyan); }
+.snd.on .wave { display: inline; }
+.snd.on .x { display: none; }
 #bosses .loops { margin-top: 32px; }
 .loops figure { margin: 0; padding: 10px; }
 .loops figcaption { font-family: var(--display); font-size: 13px; letter-spacing: 2px; text-transform: uppercase; color: var(--soft); padding: 10px 2px 2px; }
