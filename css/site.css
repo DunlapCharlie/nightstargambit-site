@@ -133,6 +133,11 @@ textarea { min-height: 140px; resize: vertical; }
 .logos a:hover .tile { border-color: var(--cyan); }
 .videos { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
 video { width: 100%; border: 1px solid var(--line); background: #000; }
+.media video, .loops video { display: block; aspect-ratio: 16 / 9; object-fit: cover; border: 0; }
+.split.flip .media { order: -1; }
+#bosses .loops { margin-top: 32px; }
+.loops figure { margin: 0; padding: 10px; }
+.loops figcaption { font-family: var(--display); font-size: 13px; letter-spacing: 2px; text-transform: uppercase; color: var(--soft); padding: 10px 2px 2px; }
 .credits dt { font-family: var(--display); font-size: 12px; letter-spacing: 2px; text-transform: uppercase; color: var(--cyan); margin-top: 14px; }
 .credits dd { margin: 2px 0 0; color: var(--paper); }
 .dl { display: flex; flex-wrap: wrap; align-items: center; gap: 18px; }
@@ -146,6 +151,7 @@ footer .right { margin-left: auto; display: flex; gap: 20px; }
 @media (max-width: 860px) {
   section { padding: 64px 0; }
   .split, .press { grid-template-columns: 1fr; }
+  .split.flip .media { order: 0; }
   .press aside { position: static; }
   .grid3, .shots { grid-template-columns: 1fr 1fr; }
   .videos, .row2 { grid-template-columns: 1fr; }
