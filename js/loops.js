@@ -55,12 +55,22 @@
       // Clicking the button on a loop that is not the one with sound gives it the sound;
       // clicking the one that has it turns sound off for the page.
       if (soundOn && !v.muted) { soundOn = false; chosen = null; }
-      else { soundOn = true; chosen = v; load(v); v.play().catch(function () {}); }
+      else {
+        soundOn = true; chosen = v; load(v); v.play().catch(function () {});
+        document.dispatchEvent(new CustomEvent("nightstar:sound")); // crew.js stops any voice line
+      }
       refreshSound();
     });
     v.parentNode.appendChild(b);
     v._snd = b;
   }
+
+  // A crew voice line (crew.js) takes the sound: every video goes quiet.
+  document.addEventListener("nightstar:voice", function () {
+    soundOn = false; chosen = null;
+    videos.forEach(function (v) { if (!v.muted) v.muted = true; });
+    refreshSound();
+  });
 
   if (still || !("IntersectionObserver" in window)) {
     videos.forEach(function (v) { v.controls = true; v.muted = v.classList.contains("gif"); load(v); });
