@@ -306,7 +306,7 @@
       '<span class="role">' + esc(role) + '</span><h3>' + esc(c.name) + '</h3><p>' + esc(blurb) + '</p></div></div>' +
       '<p class="teaser">' + esc(c.teaser) + '</p><dl>';
     if (c.stations.length) h += '<dt>Best stations</dt><dd>' + c.stations.join(", ") + '</dd>';
-    if (c.season) h += '<dt>Their season</dt><dd>' + c.season + ' fully voiced episodes</dd>';
+    if (c.season) h += '<dt>Their season</dt><dd>' + c.season + ' episodes</dd>';
     h += '<dt>Voiced by</dt><dd>' + esc(c.voice || "Casting now") + '</dd></dl>';
     h += c.lines.length ? '<ul class="said"></ul>' : '<p class="soon">Voice lines coming soon.</p>';
     dlg.innerHTML = h + '</div>';
