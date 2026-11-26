@@ -164,7 +164,6 @@ textarea { min-height: 140px; resize: vertical; }
 video { width: 100%; border: 1px solid var(--line); background: #000; }
 .media video, .loops video { display: block; aspect-ratio: 16 / 9; object-fit: cover; border: 0; }
 .split.flip .media { order: -1; }
-.split.mission { margin-bottom: 36px; }
 .media, .loops figure { position: relative; }
 .snd { position: absolute; right: 20px; top: 20px; display: flex; align-items: center; gap: 8px; padding: 7px 12px 7px 9px;
   font: 600 12px/1 var(--display); letter-spacing: 2px; text-transform: uppercase; color: var(--paper);
